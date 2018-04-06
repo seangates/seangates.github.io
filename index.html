@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SeanGates.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <!-- <script src="main.js"></script> -->
+    <style>
+        :root {
+            --color-primary: #FFE54D; /* Main Primary color */
+            --color-secondary-1: #5FEF49; /* Main Secondary color (1) */
+            --color-secondary-2: #FD4D5A; /* Main Secondary color (2) */
+            --color-complement: #8055E2; /* Main Complement color */
+
+            --font-color-primary: #050709;
+            --font-color-link: #3455db;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body { 
+            color: var(--font-color-primary);
+            display: -ms-grid;
+            display: grid;
+            font-family: 'Noto Sans', Helvetica Neue, Helvetica, sans-serif;
+            grid-template-areas: 
+                "header"
+                "nav"
+                "section"
+                "footer";
+            grid-template-rows: 100vh 2rem 1fr 6rem;
+            grid-template-columns: 1fr;
+            height: 100vh;
+            margin: 0;
+        }
+
+        a {
+            color: var(--font-color-link);
+        }
+
+        /* MAIN AREAS */
+        body > header,
+        body > footer,
+        body > nav,
+        body > section {
+            padding: 1rem;
+        }
+
+        header {
+            background-color: var(--color-primary);
+            display: flex;
+            flex-direction: column;
+            grid-area: header;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+        }
+
+        header a {
+            color: var(--font-color-primary);
+            text-decoration: none;
+            font-size: 2rem;
+        }
+
+        footer {
+            grid-area: footer;
+        }
+
+        footer nav a,
+        footer nav a span {
+            display: inline-block;
+        }
+
+        footer nav a:not(:first-child) {
+            margin-left: 1rem;
+        }
+
+        footer nav a span {
+            margin-left: .5rem;
+            text-decoration: underline;
+        }
+
+        nav {
+            grid-area: nav;
+        }
+
+        section {
+            grid-area: section;
+        }
+
+        /* skip to main content */
+        body > a.skip-to-main {
+            left: 0;
+            position: absolute;
+            top: 0;
+            transform: translateY(-50px);
+        }
+
+        body > a.skip-to-main:focus {
+            transform: translateY(0);
+        }
+
+        /* TYPOGRAPHY */
+        h1 {
+            font-size: 10vh;
+        }
+
+        /* RESPONSIVE SETTINGS */
+        @media (min-width: 701px) {
+            body {
+                grid-template-areas: 
+                    "header header"
+                    "nav section"
+                    "footer footer";
+                grid-template-rows: 100vh 1fr 6rem;
+                grid-template-columns: 12.5rem 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            html {
+                font-size: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a class="skip-to-main" href="#mainContent">Skip to main content</a>
+    <header>
+        <h1>Sean Gates</h1>
+        <a href="#mainContent">Learn more about me <i class="fas fa-chevron-down"></i></a>
+    </header>
+    <nav>additional navigation will go here</nav>
+    <section id="mainContent" class="body">Actual content coming soon.</section>
+    <footer>
+        Copyright &copy; 2018 Sean Gates
+        <nav>
+            <a href="https://linkedin.com/in/seangates"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
+            <a href="https://twitter.com/seangates"><i class="fab fa-twitter"></i><span>Twitter</span></a>
+        </nav>
+    </footer>
+</body>
+</html>
