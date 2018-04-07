@@ -11,21 +11,54 @@
     <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
     <!-- <script src="main.js"></script> -->
     <style>
+        /* UTILITY CLASSES */
+        .clipped {
+            border: 0;
+            clip: rect(1px, 1px, 1px, 1px);
+            height: 1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            white-space: nowrap;
+            width: 1px;
+        }
+
+        .unclipped {
+            clip: auto;
+            height: auto;
+            overflow: visible;
+            white-space: normal;
+            width: auto;
+        }
+
+        .truncate {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        /* VARIABLE DEFINITIONS */
         :root {
-            --color-primary: #FFE54D; /* Main Primary color */
-            --color-secondary-1: #5FEF49; /* Main Secondary color (1) */
-            --color-secondary-2: #FD4D5A; /* Main Secondary color (2) */
+            --color-primary: #5bc0eb; /* Main Primary color */
+            --color-secondary-1: #fa7921; /* Main Secondary color (2) */
+            --color-secondary-2: #9bc53d; /* Main Secondary color (2) */
+            --color-secondary-3: #e55934; /* Main Secondary color (2) */
+            --color-secondary-4: #fde74c; /* Main Secondary color (1) */
             --color-complement: #8055E2; /* Main Complement color */
+
+            --color-border: #999999;
 
             --font-color-primary: #050709;
             --font-color-link: #3455db;
         }
 
+        /* CORE SETUP */
         html {
             font-size: 16px;
         }
 
-        body { 
+        body {
+            background-color: #ffffff;
             color: var(--font-color-primary);
             display: -ms-grid;
             display: grid;
@@ -33,9 +66,9 @@
             grid-template-areas: 
                 "header"
                 "nav"
-                "section"
+                "main"
                 "footer";
-            grid-template-rows: 100vh 2rem 1fr 6rem;
+            grid-template-rows: 100vh 6rem 1fr 100vh;
             grid-template-columns: 1fr;
             height: 100vh;
             margin: 0;
@@ -45,15 +78,48 @@
             color: var(--font-color-link);
         }
 
+        /* TYPOGRAPHY */
+        h1 {
+            font-size: 6rem;
+        }
+
+        h2 {
+            font-size: 4rem;
+        }
+
+        h3 {
+            font-size: 2rem;
+        }
+
+        h4 {
+            font-size: 1rem;
+            font-weight: bolder;
+        }
+
+        /* SKIP TO MAIN CONTENT */
+        body > a.skip-to-main {
+            left: 0;
+            position: absolute;
+            top: 0;
+            padding: 3px;
+            text-align: center;
+            transform: translateY(-50px);
+            width: 100%;
+        }
+
+        body > a.skip-to-main:focus {
+            transform: translateY(0);
+        }
+
         /* MAIN AREAS */
         body > header,
         body > footer,
         body > nav,
-        body > section {
+        body > main {
             padding: 1rem;
         }
 
-        header {
+        body > header {
             background-color: var(--color-primary);
             display: flex;
             flex-direction: column;
@@ -63,65 +129,60 @@
             justify-content: center;
         }
 
-        header a {
+        body > header a {
             color: var(--font-color-primary);
             text-decoration: none;
             font-size: 2rem;
         }
 
-        footer {
+        body > footer {
+            align-items: center;
+            background-color: var(--color-secondary-4);
+            display: flex;
+            flex-direction: column;
             grid-area: footer;
+            justify-content: center;
+            text-align: center;
         }
 
-        footer nav a,
-        footer nav a span {
+        body > footer nav a,
+        body > footer nav a span {
             display: inline-block;
+            font-size: 2rem;
         }
 
-        footer nav a:not(:first-child) {
+        body > footer nav a:not(:first-child) {
             margin-left: 1rem;
         }
 
-        footer nav a span {
+        body > footer nav a span {
             margin-left: .5rem;
             text-decoration: underline;
         }
 
-        nav {
+        body > nav {
             grid-area: nav;
+            text-align: center;
         }
 
-        section {
-            grid-area: section;
+        main {
+            grid-area: main;
         }
 
-        /* skip to main content */
-        body > a.skip-to-main {
-            left: 0;
-            position: absolute;
-            top: 0;
-            transform: translateY(-50px);
+        main > section {
+            min-height: 100vh;
         }
 
-        body > a.skip-to-main:focus {
-            transform: translateY(0);
+        body > footer > a,
+        section > header,
+        section > footer {
+            text-align: center;
         }
 
-        /* TYPOGRAPHY */
-        h1 {
-            font-size: 10vh;
-        }
-
-        /* RESPONSIVE SETTINGS */
-        @media (min-width: 701px) {
-            body {
-                grid-template-areas: 
-                    "header header"
-                    "nav section"
-                    "footer footer";
-                grid-template-rows: 100vh 1fr 6rem;
-                grid-template-columns: 12.5rem 1fr;
-            }
+        body > footer > a span,
+        section > header span,
+        section > footer span {
+            display: block;
         }
 
         @media (max-width: 600px) {
@@ -133,18 +194,100 @@
 </head>
 <body>
     <a class="skip-to-main" href="#mainContent">Skip to main content</a>
-    <header>
-        <h1>Sean Gates</h1>
+    <header id="hero">
+        <h1>Sean Gates<span class="clipped"> - my personal website</span></h1>
         <a href="#mainContent">Learn more about me <i class="fas fa-chevron-down"></i></a>
     </header>
-    <nav>additional navigation will go here</nav>
-    <section id="mainContent" class="body">Actual content coming soon.</section>
-    <footer>
-        Copyright &copy; 2018 Sean Gates
+    <nav>
+        <a href="#bio">bio</a>
+        <a href="#accomplishments">accomplishments</a>
+        <a href="#writings">writings</a>
+        <a href="#interests">interests</a>
+    </nav>
+    <main id="mainContent" class="body">
+        <section id="bio">
+            <header>
+                <a href="#hero">
+                    <i class="fas fa-chevron-up"></i>
+                    <span>did you forget my name?</span>
+                </a>
+            </header>
+
+            <h2>bio</h2>
+            <p>coming soon</p>
+
+            <footer>
+                <a href="#accomplishments">
+                    <span>I usually don't brag</span>
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+            </footer>
+        </section>
+        <section id="accomplishments">
+            <header>
+                <a href="#bio">
+                    <i class="fas fa-chevron-up"></i>
+                    <span>learn more about me</span>
+                </a>
+            </header>
+            
+            <h2>accomplishments</h2>
+            <p>coming soon</p>
+            
+            <footer>
+                <a href="#writings">
+                    <span>sometimes I write things down</span>
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+            </footer>
+        </section>
+        <section id="writings">
+            <header>
+                <a href="#accomplishments">
+                    <i class="fas fa-chevron-up"></i>
+                    <span>I usually don't brag</span>
+                </a>
+            </header>
+            
+            <h2>writings</h2>
+            <p>coming soon</p>
+            
+            <footer>
+                <a href="#interests">
+                    <span>hobbies are a godsend</span>
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+            </footer>
+        </section>
+        <section id="interests">
+            <header>
+                <a href="#writings">
+                    <i class="fas fa-chevron-up"></i>
+                    <span>sometimes I write things down</span>
+                </a>
+            </header>
+            
+            <h2>interests</h2>
+            <p>coming soon</p>
+            
+            <footer>
+                <a href="#contact">
+                    <span>get in touch with me</span>
+                    <i class="fas fa-chevron-down"></i>
+                </a>
+            </footer>
+        </section>
+    </main>
+    <footer id="contact">
+        <a href="#interests">
+            <i class="fas fa-chevron-up"></i>
+            <span>hobbies are a godsend</span>
+        </a>
+        <h2>contact me</h2>
         <nav>
-            <a href="https://github.com/seangates"><i class="fab fa-github"></i><span>GitHub</span></a>
-            <a href="https://linkedin.com/in/seangates"><i class="fab fa-linkedin"></i><span>LinkedIn</span></a>
-            <a href="https://twitter.com/seangates"><i class="fab fa-twitter"></i><span>Twitter</span></a>
+            <a href="https://github.com/seangates"><i class="fab fa-github"></i><div>GitHub</div></a>
+            <a href="https://linkedin.com/in/seangates"><i class="fab fa-linkedin"></i><div>LinkedIn</div></a>
+            <a href="https://twitter.com/seangates"><i class="fab fa-twitter"></i><div>Twitter</div></a>
         </nav>
     </footer>
 </body>
