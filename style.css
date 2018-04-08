@@ -1,0 +1,223 @@
+/* UTILITY CLASSES */
+
+.clipped {
+    border: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+    height: 1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+.unclipped {
+    clip: auto;
+    height: auto;
+    overflow: visible;
+    white-space: normal;
+    width: auto;
+}
+
+.truncate {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* VARIABLE DEFINITIONS */
+
+:root {
+    --color-primary: #5bc0eb;
+    /* Main Primary color */
+    --color-secondary-1: #fa7921;
+    /* Main Secondary color (2) */
+    --color-secondary-2: #9bc53d;
+    /* Main Secondary color (2) */
+    --color-secondary-3: #e55934;
+    /* Main Secondary color (2) */
+    --color-secondary-4: #fde74c;
+    /* Main Secondary color (1) */
+    --color-bio: #eeeeee;
+    --color-border: #999999;
+    --font-color-primary: #050709;
+    --font-color-link: #3455db;
+}
+
+/* CORE SETUP */
+
+html {
+    font-size: 16px;
+}
+
+body {
+    background-color: #ffffff;
+    color: var(--font-color-primary);
+    display: -ms-grid;
+    display: grid;
+    font-family: 'Noto Sans', Helvetica Neue, Helvetica, sans-serif;
+    grid-template-areas: "nav" "header" "main" "footer";
+    grid-template-rows: 6rem calc(100vh - 6rem) 1fr 100vh;
+    grid-template-columns: 1fr;
+    height: 100vh;
+    margin: 0;
+}
+
+a {
+    color: var(--font-color-link);
+}
+
+/* TYPOGRAPHY */
+
+h1 {
+    font-size: 6rem;
+}
+
+h2 {
+    font-size: 4rem;
+}
+
+h3 {
+    font-size: 2rem;
+}
+
+h4 {
+    font-size: 1rem;
+    font-weight: bolder;
+}
+
+/* SKIP TO MAIN CONTENT */
+
+body > a.skip-to-main {
+    left: 0;
+    position: absolute;
+    top: 0;
+    padding: 3px;
+    text-align: center;
+    transform: translateY(-50px);
+    width: 100%;
+}
+
+body > a.skip-to-main:focus {
+    transform: translateY(0);
+}
+
+/* MAIN AREAS */
+
+body > header {
+    background-color: var(--color-primary);
+    display: flex;
+    flex-direction: column;
+    grid-area: header;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+body > header .profile-photo {
+    position: relative;
+}
+
+body > header .profile-photo::after {
+    border: 10px solid var(--font-color-primary);
+    border-radius: 95px;
+    content: "";
+    height: 166px;
+    left: 1px;
+    position: absolute;
+    top: 1px;
+    width: 166px;
+}
+
+body > header a {
+    color: var(--font-color-primary);
+    text-decoration: none;
+    font-size: 2rem;
+}
+
+body > footer {
+    align-items: center;
+    background-color: var(--color-secondary-4);
+    display: flex;
+    flex-direction: column;
+    grid-area: footer;
+    justify-content: center;
+    text-align: center;
+}
+
+body > footer nav a,
+body > footer nav a span {
+    display: inline-block;
+    font-size: 2rem;
+}
+
+body > footer nav a:not(:first-child) {
+    margin-left: 1rem;
+}
+
+body > footer nav a span {
+    margin-left: .5rem;
+    text-decoration: underline;
+}
+
+body > nav {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    grid-area: nav;
+    justify-content: flex-start;
+    text-align: center;
+}
+
+body > nav a {
+    flex: 1;
+    padding: .5rem;
+    min-width: 10rem;
+}
+
+main {
+    grid-area: main;
+}
+
+main > section {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    text-align: center;
+}
+
+.section-links {
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.section-links span {
+    display: block;
+}
+
+main > section h2,
+.section-content {
+    flex-grow: 1;
+}
+
+#bio {
+    background-color: var(--color-bio);
+}
+
+#accomplishments {
+    background-color: var(--color-secondary-1);
+}
+
+#writings {
+    background-color: var(--color-secondary-2);
+}
+
+#interests {
+    background-color: var(--color-secondary-3);
+}
+
+@media (max-width: 600px) {
+    html {
+        font-size: 12px;
+    }
+}
