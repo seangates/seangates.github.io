@@ -165,14 +165,25 @@ body > nav {
     display: flex;
     flex-wrap: wrap;
     grid-area: nav;
-    justify-content: flex-start;
+    justify-content: space-evenly;
     text-align: center;
 }
 
 body > nav a {
-    flex: 1;
-    padding: .5rem;
+    /* flex: 1; */
+    color: var(--font-color-primary);
+    border-bottom: 1px solid var(--color-border);
     min-width: 10rem;
+    padding: .5rem;
+    padding-bottom: calc(.5rem + 1px);
+    text-decoration: none;
+}
+
+body > nav a:hover {
+    border-bottom-color: var(--font-color-link);
+    border-bottom-width: 2px;
+    color: var(--font-color-link);
+    padding-bottom: .5rem;
 }
 
 main {
@@ -182,8 +193,9 @@ main {
 main > section {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: calc(100vh - 2rem);
     text-align: center;
+    padding: 1rem 0;
 }
 
 .section-links {
