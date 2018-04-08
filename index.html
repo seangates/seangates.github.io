@@ -40,12 +40,14 @@
         /* VARIABLE DEFINITIONS */
         :root {
             --color-primary: #5bc0eb; /* Main Primary color */
+
             --color-secondary-1: #fa7921; /* Main Secondary color (2) */
             --color-secondary-2: #9bc53d; /* Main Secondary color (2) */
             --color-secondary-3: #e55934; /* Main Secondary color (2) */
             --color-secondary-4: #fde74c; /* Main Secondary color (1) */
-            --color-complement: #8055E2; /* Main Complement color */
 
+            --color-bio: #eeeeee;
+            
             --color-border: #999999;
 
             --font-color-primary: #050709;
@@ -64,11 +66,11 @@
             display: grid;
             font-family: 'Noto Sans', Helvetica Neue, Helvetica, sans-serif;
             grid-template-areas: 
-                "header"
                 "nav"
+                "header"
                 "main"
                 "footer";
-            grid-template-rows: 100vh 6rem 1fr 100vh;
+            grid-template-rows: 6rem calc(100vh - 6rem) 1fr 100vh;
             grid-template-columns: 1fr;
             height: 100vh;
             margin: 0;
@@ -112,12 +114,6 @@
         }
 
         /* MAIN AREAS */
-        body > header,
-        body > footer,
-        body > nav,
-        body > main {
-            padding: 1rem;
-        }
 
         body > header {
             background-color: var(--color-primary);
@@ -161,8 +157,18 @@
         }
 
         body > nav {
+            align-items: center;
+            display: flex;
+            flex-wrap: wrap;
             grid-area: nav;
+            justify-content: flex-start;
             text-align: center;
+        }
+
+        body > nav a {
+            flex: 1;
+            padding: .5rem;
+            min-width: 10rem;
         }
 
         main {
@@ -170,19 +176,40 @@
         }
 
         main > section {
+            display: flex;
+            flex-direction: column;
             min-height: 100vh;
-        }
-
-        body > footer > a,
-        section > header,
-        section > footer {
             text-align: center;
         }
 
-        body > footer > a span,
-        section > header span,
-        section > footer span {
+        .section-links {
+            flex-shrink: 0;
+            text-align: center;
+        }
+
+        .section-links span {
             display: block;
+        }
+
+        main > section h2,
+        .section-content {
+            flex-grow: 1;
+        }
+
+        #bio {
+            background-color: var(--color-bio);
+        }
+
+        #accomplishments {
+            background-color: var(--color-secondary-1);
+        }
+
+        #writings {
+            background-color: var(--color-secondary-2);
+        }
+
+        #interests {
+            background-color: var(--color-secondary-3);
         }
 
         @media (max-width: 600px) {
@@ -194,29 +221,30 @@
 </head>
 <body>
     <a class="skip-to-main" href="#mainContent">Skip to main content</a>
-    <header id="hero">
-        <h1>Sean Gates<span class="clipped"> - my personal website</span></h1>
-        <a href="#mainContent">Learn more about me <i class="fas fa-chevron-down"></i></a>
-    </header>
-    <nav>
+    <nav id="top">
         <a href="#bio">bio</a>
         <a href="#accomplishments">accomplishments</a>
         <a href="#writings">writings</a>
         <a href="#interests">interests</a>
+        <a href="#contact">contact</a>
     </nav>
+    <header>
+        <h1>Sean Gates<span class="clipped"> - my personal website</span></h1>
+        <a href="#mainContent">Learn more about me <i class="fas fa-chevron-down"></i></a>
+    </header>
     <main id="mainContent" class="body">
         <section id="bio">
-            <header>
-                <a href="#hero">
+            <header class="section-links">
+                <a href="#top">
                     <i class="fas fa-chevron-up"></i>
                     <span>did you forget my name?</span>
                 </a>
             </header>
 
             <h2>bio</h2>
-            <p>coming soon</p>
+            <div class="section-content"><p>coming soon</p></div>
 
-            <footer>
+            <footer class="section-links">
                 <a href="#accomplishments">
                     <span>I usually don't brag</span>
                     <i class="fas fa-chevron-down"></i>
@@ -224,7 +252,7 @@
             </footer>
         </section>
         <section id="accomplishments">
-            <header>
+            <header class="section-links">
                 <a href="#bio">
                     <i class="fas fa-chevron-up"></i>
                     <span>learn more about me</span>
@@ -232,9 +260,9 @@
             </header>
             
             <h2>accomplishments</h2>
-            <p>coming soon</p>
+            <div class="section-content"><p>coming soon</p></div>
             
-            <footer>
+            <footer class="section-links">
                 <a href="#writings">
                     <span>sometimes I write things down</span>
                     <i class="fas fa-chevron-down"></i>
@@ -242,7 +270,7 @@
             </footer>
         </section>
         <section id="writings">
-            <header>
+            <header class="section-links">
                 <a href="#accomplishments">
                     <i class="fas fa-chevron-up"></i>
                     <span>I usually don't brag</span>
@@ -250,9 +278,9 @@
             </header>
             
             <h2>writings</h2>
-            <p>coming soon</p>
+            <div class="section-content"><p>coming soon</p></div>
             
-            <footer>
+            <footer class="section-links">
                 <a href="#interests">
                     <span>hobbies are a godsend</span>
                     <i class="fas fa-chevron-down"></i>
@@ -260,7 +288,7 @@
             </footer>
         </section>
         <section id="interests">
-            <header>
+            <header class="section-links">
                 <a href="#writings">
                     <i class="fas fa-chevron-up"></i>
                     <span>sometimes I write things down</span>
@@ -268,9 +296,9 @@
             </header>
             
             <h2>interests</h2>
-            <p>coming soon</p>
+            <div class="section-content"><p>coming soon</p></div>
             
-            <footer>
+            <footer class="section-links">
                 <a href="#contact">
                     <span>get in touch with me</span>
                     <i class="fas fa-chevron-down"></i>
@@ -279,10 +307,12 @@
         </section>
     </main>
     <footer id="contact">
-        <a href="#interests">
-            <i class="fas fa-chevron-up"></i>
-            <span>hobbies are a godsend</span>
-        </a>
+        <header class="section-links">
+            <a href="#interests">
+                <i class="fas fa-chevron-up"></i>
+                <span>hobbies are a godsend</span>
+            </a>
+        </header>
         <h2>contact me</h2>
         <nav>
             <a href="https://github.com/seangates"><i class="fab fa-github"></i><div>GitHub</div></a>
